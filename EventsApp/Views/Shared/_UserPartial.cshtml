@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using EventsApp.Models;
+
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <img src="images/avatar.png" width="30"
+                 alt="User" class="rounded" />
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> 
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <p class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @User.Identity.Name
+                        </p>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li class="nav-item">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-light">Выйти</button>
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-page="/Admin/Players/Index" method="post">
+                                    <button class="nav-link text-light" asp-antiforgery="true" asp-area="Identity" asp-page="/Admin/Players/Index" type="submit"  title="Manage">Мои события</button>
+                                </form>
+                            </li>
+                            @if (User.IsInRole("Admins"))
+                                {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Users/List" title="Manage">Пользователи</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Admin/Players/index" title="Manage">Участники</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Admin/Events/index" title="Manage">События</a>
+                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Roles/List" title="Manage">Роли</a>
+                                </li>
+
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+}
+else
+{
+    <ul class="nav navbar-nav ml-auto">
+        <li>
+            <a class="nav-item nav-link"
+           asp-area="Identity"
+           asp-page="/Account/Login">
+                Войти
+            </a>
+        </li>
+        <li>
+            <a class="nav-item nav-link"
+           asp-area="Identity"
+           asp-page="/Users/Create">
+                Зарегистрироваться
+            </a>
+        </li>
+    </ul>
+}
+@* @if (User.IsInRole("Admins"))
+{
+    @await Component.InvokeAsync("Menu")
+} *@

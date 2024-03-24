@@ -1,0 +1,68 @@
+﻿@page
+@model CreateModel
+
+<h5 class="bg-dark text-white text-center p-2">Регистрация</h5>
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label>Имя пользователя</label>
+        <input name="UserName" class="form-control" value="@Model.UserName" />
+    </div>
+    <div class="form-group">
+        <label>Электронная почта</label>
+        <input name="Email" class="form-control" value="@Model.Email" />
+    </div>
+    <div class="form-group">
+        <label>Пароль</label>
+        <input name="Password" class="form-control" value="@Model.Password" />
+    </div>
+    <button type="submit" class="btn btn-dark">Принять</button>
+    <a class="btn btn-secondary" asp-controller="Home">Вернуться</a>
+</form>
+
+@functions {
+
+    public class CreateModel : PageModel
+    {
+        public UserManager<IdentityUser> UserManager;
+
+        public CreateModel(UserManager<IdentityUser> usrManager)
+        {
+            UserManager = usrManager;
+        }
+
+        [BindProperty]
+        [Required]
+        public string UserName { get; set; }
+
+        [BindProperty]
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [BindProperty]
+        [Required]
+        public string Password { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityUser user =
+                    new IdentityUser { UserName = UserName, Email = Email };
+                IdentityResult result =
+                    await UserManager.CreateAsync(user, Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToPage("List");
+                }
+                foreach (IdentityError err in result.Errors)
+                {
+                    ModelState.AddModelError("", err.Description);
+                }
+            }
+            return Page();
+        }
+    }
+}
+

@@ -1,0 +1,48 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+@model EventsApp.Pages.EditPlayer.ListModel
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>События</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Имя участника
+            </th>
+            @* <th>
+                Название соревнования
+            </th> *@
+            <th>
+                Победитель
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Player) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerLongName)
+            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Event.EventName)
+            </td> *@
+                @if (User.IsInRole("Admins")){
+                <td>
+                    @Html.DisplayFor(modelItem => item.Place)
+                </td>
+                }
+            <td>
+                    <a asp-page="./Edit" asp-route-id="@item.PlayerId">Изменить</a>
+                <a asp-page="./Delete" asp-route-id="@item.PlayerId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,56 @@
+
+header, footer {
+    background-color: rgb(33,37,41);
+}
+
+.nav-color {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.block_2 {
+    position: relative;
+}
+
+.some-block {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.center-both {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+"position": (
+      property: position,
+      values: static relative absolute fixed sticky
+    ),
+"top": (
+      property: top,
+      values: $position-values
+    ),
+"bottom": (
+      property: bottom,
+      values: $position-values
+    ),
+"start": (
+      property: left,
+      class: start,
+      values: $position-values
+    ),
+"end": (
+      property: right,
+      class: end,
+      values: $position-values
+    ),
+"translate-middle": (
+      property: transform,
+      class: translate-middle,
+      values: (
+        null: translate(-50%, -50%),
+        x: translateX(-50%),
+        y: translateY(-50%),
+      )
+    ),
+    

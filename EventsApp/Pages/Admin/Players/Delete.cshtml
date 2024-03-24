@@ -1,0 +1,40 @@
+﻿@page
+@model EventsApp.Pages.Admin.Players.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Удалить</h1>
+
+<h3>Подтвердите удаление</h3>
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Player.PlayerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Player.PlayerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Player.PlayerLongName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Player.PlayerLongName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Player.Event)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Player.Event.EventId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Player.PlayerId" />
+        <input type="submit" value="Удалить" class="btn btn-dark" /> |
+        <a asp-page="./Index">Вернуться к списку</a>
+    </form>
+</div>

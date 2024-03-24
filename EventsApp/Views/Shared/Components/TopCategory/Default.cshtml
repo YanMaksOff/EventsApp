@@ -1,0 +1,12 @@
+﻿@model List<ListTop>
+ 
+
+<ul class="list-group list-group-flush">
+    <h4> Рейтинг видов спорта!</h4>
+     @foreach (var a in Model.OrderByDescending(c=>c.num))
+    {
+        <li class="list-group-item">
+           В категории @a.category - @a.num участников
+        </li>
+    }   
+</ul>

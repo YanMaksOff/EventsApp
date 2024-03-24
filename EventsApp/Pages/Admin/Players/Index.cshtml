@@ -1,0 +1,56 @@
+﻿@page
+@model EventsApp.Pages.Admin.Players.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список</h1>
+@if (User.IsInRole("Admins"))
+{
+    <p>
+        <a asp-page="Create">Создать нового</a>
+    </p>
+    <form asp-page="./Index" method="get">
+            <div class="form-group">
+                <select name="searchString" class="form-control" asp-selectlist="@Html.DropDownList("EventName",@Model.events,"Все события")
+                <input type="submit" value="Выбрать" class="btn btn-secondary"/>
+            </div>
+    </form>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].PlayerLongName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Event)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Player) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerLongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.EventName)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PlayerId">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.PlayerId">Детали</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PlayerId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

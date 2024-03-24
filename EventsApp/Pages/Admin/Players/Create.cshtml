@@ -1,0 +1,44 @@
+﻿@page
+@model EventsApp.Pages.Admin.Players.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Создать</h1>
+
+<h4>Участник</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Player.PlayerName" class="control-label"></label>
+                <input asp-for="Player.PlayerName" class="form-control" />
+                <span asp-validation-for="Player.PlayerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.PlayerLongName" class="control-label"></label>
+                <input asp-for="Player.PlayerLongName" class="form-control" />
+                <span asp-validation-for="Player.PlayerLongName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.EventId" class="control-label"></label>
+                <select asp-for="Player.EventId" class ="form-control" asp-items="ViewBag.EventId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Вернуться к списку</a>
+</div>
+
+@* @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ *@

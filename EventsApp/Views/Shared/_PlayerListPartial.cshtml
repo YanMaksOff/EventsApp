@@ -1,0 +1,11 @@
+﻿
+@model Event
+
+ @if (User.IsInRole("Admins"))
+                                {
+                                    <form asp-antiforgery="true" method="post" asp-page="/Admin/Players/Index" asp-page-handler="Events" asp-route-events="@Model.EventId">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                     <button type="submit" class="btn btn-secondary">Список участников</button>
+                                     </div>
+                                     </form>
+                                }

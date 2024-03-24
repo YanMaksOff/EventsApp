@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using EventsApp.Models;
+@inject IPlayerRepository repository
+@inject SignInManager<IdentityUser> signInManager
+@model Event
+
+@if (signInManager.IsSignedIn(User))
+{
+    <form class="form-inline" asp-controller="AddPlayer" asp-route-Name="@User.Identity.Name"  asp-route-sevent="@Model.EventId" )>
+<div class="input-group mb-1">
+
+        <input type="text" class="form-control" required placeholder="Имя Фамилия" name="LongName" aria-describedby="button-addon2">
+        <button class="btn btn-dark" type="submit" id="button-addon2">Принять участие в событии "@Model.EventName"</button>
+        
+</div>
+</form>
+  }

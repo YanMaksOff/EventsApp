@@ -1,0 +1,54 @@
+﻿@page
+@model EventsApp.Pages.Admin.Events.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>События</h1>
+
+<p>
+    <a asp-page="Create">Создать новое</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название
+            </th>
+            <th>
+                Категория
+            </th>
+            <th>
+                Информация
+            </th>
+            <th>
+                Время
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Event) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventTime)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.EventId">Изменить</a> |
+                <a asp-page="./Details" asp-route-id="@item.EventId">Детали</a> |
+                <a asp-page="./Delete" asp-route-id="@item.EventId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

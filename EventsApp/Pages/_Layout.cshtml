@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <base href="~/" />
+</head>
+<body>
+    <div class="m-2">
+        <h5 class="bg-secondary text-white text-center p-2">Управление событиями</h5>
+        @RenderBody()
+    </div>
+    <a class="btn btn-secondary" asp-action="Index"
+       asp-controller="Home" asp-route-category="">На главную</a>
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>
